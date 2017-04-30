@@ -27,10 +27,18 @@ This software is built on the Robotic Operating System ([ROS]), which needs to b
 
 ### Building
 
+Darknet on the CPU is fast (approximately 1.5 seconds on an Intel Core i7-6700HQ CPU @ 2.60GHz × 8) but it's like 500 times faster on GPU! You'll have to have an Nvidia GPU and you'll have to install CUDA. The CMakeLists.txt file automatically detects if you have CUDA installed or not. CUDA is a parallel computing platform and application programming interface (API) model created by Nvidia. If you do not have CUDA on your System the build process will switch to the CPU version of YOLO. If you are compiling with CUDA, you might receive the following build error:
+
+    nvcc fatal : Unsupported gpu architecture 'compute_61'.
+
+This means that you need to check the compute capability (version) of your GPU. You can find a list of supported GPUs in CUDA here: [CUDA - WIKIPEDIA](https://en.wikipedia.org/wiki/CUDA#Supported_GPUs). Simply find the compute capability of your GPU and replace in darknet_ros/CMakeLists.txt the version number 61 with your version number:
+
+    -O3 -gencode arch=compute_61,code=sm_61
+
 In order to install darknet_ros, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
 
     cd catkin_workspace/src
-    git clone --recursive git@bitbucket.org:leggedrobotics/darknet_ros.git
+    git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
     cd ../
     catkin build darknet_ros
 
