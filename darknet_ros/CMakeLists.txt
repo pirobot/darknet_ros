@@ -19,8 +19,14 @@ if (CUDA_FOUND)
   message(STATUS "CUDA Libararies: ${CUDA_LIBRARIES}")
   set(
     CUDA_NVCC_FLAGS
-    ${CUDA_NVCC_FLAGS};
-    -O3 -gencode arch=compute_61,code=sm_61
+    ${CUDA_NVCC_FLAGS}
+    -std=c++11
+    -O3
+    -gencode=arch=compute_20,code=sm_20 
+    -gencode=arch=compute_30,code=sm_30 
+    -gencode=arch=compute_50,code=sm_50 
+    -gencode=arch=compute_52,code=sm_52 
+    -gencode=arch=compute_52,code=compute_52 
   )
   add_definitions(-DGPU)
 else()
@@ -180,7 +186,7 @@ else()
     ${DARKNET_PATH}/src/super.c                   ${DARKNET_PATH}/src/detector.c
     ${DARKNET_PATH}/src/regressor.c
   )
-
+  
   target_link_libraries(${PROJECT_NAME}
     m
     pthread
@@ -189,6 +195,8 @@ else()
     ${catkin_LIBRARIES}
   )
 endif()
+
+add_dependencies(${PROJECT_NAME} darknet_ros_msgs_generate_messages_cpp) 
 
 # Download tiny-yolo-voc.weights
 set(PATH "${CMAKE_CURRENT_SOURCE_DIR}/weights")
