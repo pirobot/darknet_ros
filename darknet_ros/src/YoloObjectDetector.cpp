@@ -163,7 +163,7 @@ void YoloObjectDetector::init()
   {
     cv::namedWindow(opencvWindow_, cv::WINDOW_NORMAL);
     cv::moveWindow(opencvWindow_, 0, 0);
-    cv::resizeWindow(opencvWindow_, 1352, 1013);
+    cv::resizeWindow(opencvWindow_, 640, 480);
   }
 
   // Publisher.
@@ -204,8 +204,8 @@ void YoloObjectDetector::drawBoxes(cv::Mat &inputFrame, std::vector<RosBox_> &ro
      cv::rectangle(inputFrame, topLeftCorner, botRightCorner, rosBoxColor, 2);
      std::ostringstream probability;
      probability << rosBoxes[i].prob*100;
-     cv::putText(inputFrame, objectLabel + " (" + probability.str() + "%)", cv::Point(xmin, ymax+15), cv::FONT_HERSHEY_PLAIN,
-                 1.0, rosBoxColor, 2.0);
+     //cv::putText(inputFrame, objectLabel + " (" + probability.str() + "%)", cv::Point(xmin, ymax+15), cv::FONT_HERSHEY_PLAIN, 1.0, rosBoxColor, 2.0);
+     cv::putText(inputFrame, objectLabel, cv::Point(xmin, ymax+15), cv::FONT_HERSHEY_PLAIN, 1.0, rosBoxColor, 2.0);
   }
 }
 
