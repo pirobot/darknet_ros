@@ -211,7 +211,7 @@ void YoloObjectDetector::drawBoxes(cv::Mat &inputFrame, std::vector<RosBox_> &ro
 
 void YoloObjectDetector::runYolo(cv::Mat &fullFrame, int id)
 {
-  ROS_INFO("[YoloObjectDetector] runYolo().");
+  //ROS_INFO("[YoloObjectDetector] runYolo().");
 
   cv::Mat inputFrame = fullFrame.clone();
 
@@ -226,7 +226,7 @@ void YoloObjectDetector::runYolo(cv::Mat &fullFrame, int id)
   {
     if(!darknetImageViewer_)
     {
-      std::cout << "# Objects: " << num << std::endl;
+      //std::cout << "# Objects: " << num << std::endl;
 
     }
     // split bounding boxes by class
@@ -240,7 +240,7 @@ void YoloObjectDetector::runYolo(cv::Mat &fullFrame, int id)
             rosBoxCounter_[j]++;
             if(!darknetImageViewer_)
             {
-              std::cout << classLabels_[boxes_[i].Class] << " (" << boxes_[i].prob*100 << "%)" << std::endl;
+              //std::cout << classLabels_[boxes_[i].Class] << " (" << boxes_[i].prob*100 << "%)" << std::endl;
             }
          }
       }
@@ -292,7 +292,7 @@ void YoloObjectDetector::runYolo(cv::Mat &fullFrame, int id)
 
 void YoloObjectDetector::cameraCallback(const sensor_msgs::ImageConstPtr& msg)
 {
-  ROS_INFO("[YoloObjectDetector] USB image received.");
+  //ROS_INFO("[YoloObjectDetector] USB image received.");
 
   cv_bridge::CvImagePtr cam_image;
 
